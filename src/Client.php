@@ -9,6 +9,7 @@ namespace Contentful;
 use Contentful\Log\NullLogger;
 use Contentful\Log\StandardTimer;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Exception\ClientException;
 use Contentful\Log\LoggerInterface;
@@ -184,5 +185,15 @@ abstract class Client
         }
 
         return $result;
+    }
+
+    /**
+     * Changed Http Client need have added BearerToken to HandlerStack.
+     *
+     * @param ClientInterface $httpClient
+     */
+    public function setHttpClient(ClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
     }
 }
